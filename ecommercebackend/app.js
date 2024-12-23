@@ -20,7 +20,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: "https://ecommerce-1-7dag.onrender.com/",  // Allow specific origin
+  origin: "https://ecommerce-1-7dag.onrender.com",  // Allow specific origin
   credentials: true,  // Allow credentials (cookies, authorization headers, etc.)
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
