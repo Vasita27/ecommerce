@@ -59,8 +59,9 @@ const UserSignup = () => {
   return (
     <div className="signup-container">
       <form onSubmit={handleSignup} >
+      <h2>User Signup</h2> <br></br>
         <div className="input-group">
-        <h2>User Signup</h2> <br></br>
+       
           <label>Name</label>
           <input
             type="text"

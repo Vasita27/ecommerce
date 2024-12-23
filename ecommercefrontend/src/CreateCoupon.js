@@ -37,7 +37,7 @@ const CreateCoupon = () => {
   };
 
   const handleGoBack = () => {
-    navigate('/admin/dashboard');
+    navigate('/admindashboard');
   };
 
   return (

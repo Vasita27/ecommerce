@@ -111,12 +111,16 @@ const CartPage = () => {
       alert('Please login first');
       return;
     }
+    if(!address){
+      alert('Please select an address');
+      return;
+    }
 
     // Get current date and time using JavaScript's Date object
     const currentDate = new Date();
     const date = currentDate.toLocaleDateString(); // Format date as mm/dd/yyyy (or according to your locale)
     const time = currentDate.toLocaleTimeString(); // Format time as hh:mm:ss
-
+    
     // Ensure final price is calculated with the discount
     const orderTotal = finalPrice;
 
@@ -338,6 +342,7 @@ const CartPage = () => {
           type="text"
           placeholder="Enter your delivery address"
           value={address}
+          required="true"
           onChange={(e) => setAddress(e.target.value)}
           className="address-input"
         />

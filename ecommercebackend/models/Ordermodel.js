@@ -5,6 +5,10 @@ const orderSchema = new mongoose.Schema({
     type: String,// Assuming you have a 'User' model for user information
     required: true
   },
+  orderId :{
+    type: String,
+    required: true
+  },
   date: {
     type: String, // Store date as a string (you can also use Date type)
     required: true,
@@ -35,6 +39,6 @@ const orderSchema = new mongoose.Schema({
   ],
 });
 
-const Orders = mongoose.model('Orders', orderSchema);
+const Orders = mongoose.model('Orders', orderSchema,"new_orders");
 
 module.exports = Orders;

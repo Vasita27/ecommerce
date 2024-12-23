@@ -130,7 +130,7 @@ router.post('/delete-items', async (req, res) => {
 router.post('/place-order', async (req, res) => {
   try {
     const { userId, date, time, address, price, productsOrdered } = req.body;
-  
+    console.log(req.body)
     const orderId = Math.floor(100000 + Math.random() * 900000).toString();
     const trackingId = Math.random().toString(36).substring(2, 14).toUpperCase();
 
@@ -149,7 +149,7 @@ router.post('/place-order', async (req, res) => {
       price,
       productsOrdered
     });
-   
+    console.log("here")
     await order.save();
    
     const emailHtml = `<div>Order Confirmation for ${user.name}...</div>`; // Simplified for brevity
