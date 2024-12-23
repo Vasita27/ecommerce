@@ -20,11 +20,12 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000','https://merabestie.com','https://hosteecommerce.vercel.app',"https://ecommerce-1-7dag.onrender.com/"], 
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  origin: "*",  // Allow all origins
+  credentials: true,  // Allow cookies to be sent
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // Allow all common HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']  // Allow all headers
 }));
+
 
 app.use(express.json());
 app.use(require('cookie-parser')());
