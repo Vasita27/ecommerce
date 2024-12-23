@@ -7,10 +7,10 @@ const UserLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
+  const navigate=useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
-
+   
     // Clear any previous error message
     setErrorMessage('');
 
@@ -27,7 +27,7 @@ const UserLogin = () => {
       
       if (response.data.userId) {
         console.log(response.data.userId);
-        window.location.href = `/userdashboard`;
+        navigate("/userdashboard");
       }
     } catch (error) {
       if (error.response) {
