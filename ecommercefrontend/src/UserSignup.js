@@ -26,7 +26,7 @@ const UserSignup = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/auth/signup', {
+      const response = await axios.post('https://ecommerce-8m77.onrender.com/auth/signup', {
         name,
         email,
         password,

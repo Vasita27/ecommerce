@@ -31,7 +31,7 @@ const SellerSignup = () => {
 
     try {
       // Send the POST request to the backend with credentials enabled
-      const response = await axios.post('http://localhost:5000/admin/seller/signup', formData, {
+      const response = await axios.post('https://ecommerce-8m77.onrender.com/admin/seller/signup', formData, {
         withCredentials: true, // Ensure that the session cookie is sent
       });
 

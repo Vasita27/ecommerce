@@ -23,7 +23,7 @@ const SellerLogin = () => {
 
     try {
       // Send login request to the backend
-      const response = await axios.post('http://localhost:5000/auth/seller/login', {
+      const response = await axios.post('https://ecommerce-8m77.onrender.com/auth/seller/login', {
         sellerId,
         emailOrPhone,
         password

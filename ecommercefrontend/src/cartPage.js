@@ -18,7 +18,7 @@ const CartPage = () => {
   // Fetch product details for each productId
   const getProductDetails = async (productId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/product/${productId}`);
+      const response = await axios.get(`https://ecommerce-8m77.onrender.com/product/${productId}`);
       return response.data.product;
     } catch (err) {
       console.log(err);
@@ -42,12 +42,13 @@ const CartPage = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/cart/get-cart', { userId });
+      const response = await axios.post('https://ecommerce-8m77.onrender.com/cart/get-cart', { userId });
       if (response.data.success) {
         const productsInCart = response.data.cart.productsInCart || [];
 
         // Fetch product details for each product in the cart
         const cartItemsWithDetails = await Promise.all(
+  
           productsInCart.map(async (item) => {
             const productDetails = await getProductDetails(item.productId);
             return {
@@ -84,7 +85,7 @@ const CartPage = () => {
     const code = couponCode;  // Ensure this matches the backend's expected 'code'
     try {
       // Send the coupon code to the backend to verify it
-      const response = await axios.post("http://localhost:5000/coupon/verify-coupon", { code });
+      const response = await axios.post("https://ecommerce-8m77.onrender.com/coupon/verify-coupon", { code });
       
       // Check if the coupon is valid
       if (response.data.success) {
@@ -125,7 +126,7 @@ const CartPage = () => {
     const orderTotal = finalPrice;
 
     try {
-      const response = await axios.post('http://localhost:5000/cart/place-order', {
+      const response = await axios.post('https://ecommerce-8m77.onrender.com/cart/place-order', {
         userId,
         date, // Current date
         time, // Current time
@@ -160,7 +161,7 @@ const CartPage = () => {
   // Fetch available coupons (this can be modified to get real coupons from the backend)
   const fetchCoupons = async () => {
     console.log("Fetching coupons...");
-    const response = await axios.get("http://localhost:5000/coupon/get-coupon");
+    const response = await axios.get("https://ecommerce-8m77.onrender.com/coupon/get-coupon");
     setCoupons(response.data.coupons);
   };
 
@@ -172,7 +173,7 @@ const CartPage = () => {
   const handleUpdateQuantity = async (productId, quantity) => {
     const userId = sessionStorage.getItem('userId');
     try {
-      const response = await axios.put('http://localhost:5000/cart/update-quantity', {
+      const response = await axios.put('https://ecommerce-8m77.onrender.com/cart/update-quantity', {
         userId,
         productId,
         productQty: quantity,
@@ -193,7 +194,7 @@ const CartPage = () => {
   const handleDeleteFromCart = async (productId) => {
     const userId = sessionStorage.getItem('userId');
     try {
-      const response = await axios.post('http://localhost:5000/cart/delete-items', {
+      const response = await axios.post('https://ecommerce-8m77.onrender.com/cart/delete-items', {
         userId,
         productId,
       });

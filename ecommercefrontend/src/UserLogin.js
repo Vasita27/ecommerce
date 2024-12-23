@@ -20,7 +20,7 @@ const UserLogin = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/auth/login', {
+      const response = await axios.post('https://ecommerce-8m77.onrender.com/auth/login', {
         email,
         password
       }, { withCredentials: true });

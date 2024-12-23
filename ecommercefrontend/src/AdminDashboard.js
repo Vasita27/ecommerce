@@ -21,7 +21,7 @@ const AdminDashboard = () => {
     setSuccess('');
 
     try {
-      const response = await axios.post('http://localhost:5000/admin/logout', {}, { withCredentials: true });
+      const response = await axios.post('https://ecommerce-8m77.onrender.com/admin/logout', {}, { withCredentials: true });
 
       if (response.data.success) {
         setSuccess('Logout successful!');
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
     }
 
     try {
-      const response = await axios.delete('http://localhost:5000/coupon/delete-coupon', {
+      const response = await axios.delete('https://ecommerce-8m77.onrender.com/coupon/delete-coupon', {
         data: { code: couponCode, discountPercentage }
       }, { withCredentials: true });
 
@@ -83,7 +83,7 @@ const AdminDashboard = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await axios.get('http://localhost:5000/get-product', { withCredentials: true });
+      const response = await axios.get('https://ecommerce-8m77.onrender.com/get-product', { withCredentials: true });
       setProducts(response.data.products); // Assuming 'products' array is in response data
     } catch (err) {
       setError('Error fetching products');
@@ -97,7 +97,7 @@ const AdminDashboard = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await axios.get('http://localhost:5000/get-user', { withCredentials: true });
+      const response = await axios.get('https://ecommerce-8m77.onrender.com/get-user', { withCredentials: true });
       setUsers(response.data.users); // Assuming 'users' array is in response data
     } catch (err) {
       setError('Error fetching users');
@@ -119,7 +119,7 @@ const AdminDashboard = () => {
     try {
       setLoading(true);
       const response = await axios.put(
-        'http://localhost:5000/instock-update',
+        'https://ecommerce-8m77.onrender.com/instock-update',
         {
           productId,
           price,

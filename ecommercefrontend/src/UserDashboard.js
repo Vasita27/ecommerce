@@ -19,7 +19,7 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchUserId = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/cart/check-session', { withCredentials: true });
+        const response = await axios.get('https://ecommerce-8m77.onrender.com/cart/check-session', { withCredentials: true });
         const { userId } = response.data;
         sessionStorage.setItem('userId', userId);
         setUserId(userId);
@@ -35,7 +35,7 @@ const UserDashboard = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/get-product');
+      const response = await axios.get('https://ecommerce-8m77.onrender.com/get-product');
       setProducts(response.data.products);
     } catch (err) {
       setError('Failed to load products');
@@ -57,7 +57,7 @@ const UserDashboard = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/product/category', {
+      const response = await axios.post('https://ecommerce-8m77.onrender.com/product/category', {
         category,
       });
       setFilteredProducts(response.data.products);
@@ -81,7 +81,7 @@ const UserDashboard = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/cart/addtocart', {
+      const response = await axios.post('https://ecommerce-8m77.onrender.com/cart/addtocart', {
         userId,
         productId,
         quantity,
@@ -113,7 +113,7 @@ const UserDashboard = () => {
   const handleUpdateQuantity = async (productId) => {
     const quantity = quantities[productId] || 1;
     try {
-      const response = await axios.put('http://localhost:5000/cart/update-quantity', {
+      const response = await axios.put('https://ecommerce-8m77.onrender.com/cart/update-quantity', {
         userId,
         productId,
         productQty: quantity,
@@ -137,7 +137,7 @@ const UserDashboard = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/cart/delete-items', {
+      const response = await axios.post('https://ecommerce-8m77.onrender.com/cart/delete-items', {
         userId,
         productId,
       });

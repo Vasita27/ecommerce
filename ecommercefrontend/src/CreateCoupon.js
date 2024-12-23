@@ -21,7 +21,7 @@ const CreateCoupon = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/coupon/save-coupon',
+        'https://ecommerce-8m77.onrender.com/coupon/save-coupon',
         { code, discountPercentage },
         { withCredentials: true }
       );

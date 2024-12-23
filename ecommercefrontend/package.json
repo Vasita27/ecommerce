@@ -2,6 +2,7 @@
   "name": "ecommercefrontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://ecommerce-8m77.onrender.com/",
   "dependencies": {
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
