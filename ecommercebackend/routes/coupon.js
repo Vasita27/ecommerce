@@ -42,7 +42,7 @@ async function sendEmailToAllUsers(subject, message) {
   // Get all coupons route
   router.get('/get-coupon', async (req, res) => {
     try {
-      console.log("got it")
+      
       const coupons = await Coupon.find();
       res.status(200).json({
         success: true,

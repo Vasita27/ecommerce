@@ -23,12 +23,12 @@ const transporter = nodemailer.createTransport({
 });
 router.get('/check-session', (req, res) => {
   const {userId}=req.session;
-  console.log(req.session)
+
   if (userId) {
-    console.log("hiii")
+   
     return res.json({ userId: userId });
   } else {
-    console.log("no")
+  
     return res.status(401).json({ error: 'User not logged in' });
   }
 });
@@ -37,9 +37,9 @@ router.get('/check-session', (req, res) => {
 // Add to Cart Route
 router.post('/addtocart', async (req, res) => {
   try {
-    console.log(req.body)
+   
     const { userId, productId,quantity} = req.body;
-    console.log(quantity)
+   
     let cart = await Cart.findOne({ userId });
     if (cart) {
       cart.productsInCart.push({ productId, productQty:quantity });
@@ -60,7 +60,7 @@ router.post('/addtocart', async (req, res) => {
 router.post('/get-cart', async (req, res) => {
   try {
     const { userId } = req.body;
-    console.log("hellohi")
+  
     const cart = await Cart.findOne({ userId });
 
     if (!cart) return res.status(404).json({ success: false, message: 'Cart not found for this user' });
@@ -130,15 +130,15 @@ router.post('/delete-items', async (req, res) => {
 router.post('/place-order', async (req, res) => {
   try {
     const { userId, date, time, address, price, productsOrdered } = req.body;
-    console.log(req.body)
+  
     const orderId = Math.floor(100000 + Math.random() * 900000).toString();
     const trackingId = Math.random().toString(36).substring(2, 14).toUpperCase();
-console.log("jejie")
+
     const user = await User.findOne({userId});
     if (!user) throw new Error('User not found');
 
     const productIds = productsOrdered.map(item => item.productId);
-    console.log("finally")
+   
     const productDetails = await Product.find({ productId: { $in: productIds } });
     const order = new Orders({
       userId,
@@ -149,9 +149,9 @@ console.log("jejie")
       price,
       productsOrdered
     });
-    console.log("odered")
+   
     await order.save();
-    console.log("hkgug")
+   
     const emailHtml = `<div>Order Confirmation for ${user.name}...</div>`; // Simplified for brevity
     await transporter.sendMail({ from: `pecommerce8@gmail.com`, to: user.email, subject: 'Order Confirmation', html: emailHtml });
 

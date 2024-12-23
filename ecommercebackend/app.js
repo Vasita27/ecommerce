@@ -93,7 +93,7 @@ app.post('/product/category', async (req, res) => {
       default:
         searchCategory = category;
     }
-    console.log(searchCategory)
+   
     const products = await Product.find({ category: searchCategory });
 
     res.status(200).json({
@@ -187,8 +187,7 @@ app.put('/update-visibility', async (req, res) => {
 app.post('/:productId', async (req, res) => {
   try {
     const productId = req.params.productId;
-    console.log("heeere")
-
+  
     // Find product by productId
     const product = await Product.findOne({ productId });
 
@@ -218,14 +217,14 @@ app.get('/product/:productId', async (req, res) => {
   try {
     const { productId } = req.params;
     const product = await Product.findOne({productId});
-    console.log("mabe till here")
+   
     if (!product) {
       return res.status(404).json({
         success: false,
         message: 'Product not found'
       });
     }
-    console.log("made it")
+   
     res.status(200).json({
       success: true,
       product

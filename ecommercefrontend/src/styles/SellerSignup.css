@@ -1,0 +1,96 @@
+/* General Page Styling */
+.sellerSignupContainer {
+    background-color: #F1F0E8; /* Light neutral background */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+  
+  /* Form Styling */
+  .sellerSignupContainer form {
+    background-color: #B3C8CF; /* Slightly darker background for form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: left;
+    
+  }
+  
+  /* Form Heading */
+  .sellerSignupContainer h2 {
+    color: black;
+    text-align: left; /* Left-aligned heading */
+    margin-bottom: 20px;
+  }
+  
+  /* Input Fields */
+  .sellerSignupContainer input {
+    width: 90%;
+    padding: 12px; /* Slightly increased input height */
+    font-size: 14px;
+    border: 1px solid #444;
+    margin-right: 50px !important;
+    border-radius: 5px;
+    background-color: #F1F0E8;
+    color: black;
+    margin-bottom: 15px;
+  }
+  
+  /* Input Placeholder Styling */
+  .sellerSignupContainer input::placeholder {
+    color: #666;
+    font-size: 13px;
+  }
+  
+  /* Input Focus Effect */
+  .sellerSignupContainer input:focus {
+    border-color: #4da8ff;
+    outline: none;
+  }
+  .input-class{
+    margin-right: 20px;
+  }
+  /* Error Message */
+  .sellerSignupContainer .errorMessage {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 10px;
+    text-align: left;
+    margin-right: 20px;
+  }
+  
+  /* Success Message */
+  .sellerSignupContainer .successMessage {
+    color: green;
+    font-size: 12px;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  /* Button Styling */
+  .sellerSignupContainer button {
+    width: 100%;
+    background-color: #89A8B2;
+    color: white;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  /* Button Hover Effect */
+  .sellerSignupContainer button:hover {
+    background-color: #004080;
+  }
+  
+  /* Loading State */
+  .sellerSignupContainer button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './styles/UserLogin.css';
+import { useNavigate,Link } from 'react-router-dom';
 
 const UserLogin = () => {
   const [email, setEmail] = useState('');
@@ -21,11 +23,10 @@ const UserLogin = () => {
       const response = await axios.post('http://localhost:5000/auth/login', {
         email,
         password
-      }, {withCredentials: true} );
-      console.log(response.data)
+      }, { withCredentials: true });
+      
       if (response.data.userId) {
-        // Redirect to user dashboard or another page after login
-        console.log(response.data.userId)
+        console.log(response.data.userId);
         window.location.href = `/userdashboard`;
       }
     } catch (error) {
@@ -39,9 +40,10 @@ const UserLogin = () => {
 
   return (
     <div className="login-container">
-      <h2>User Login</h2>
       <form onSubmit={handleLogin}>
+      <h2>User Login</h2>
         <div className="input-group">
+
           <label>Email</label>
           <input
             type="email"
@@ -65,7 +67,9 @@ const UserLogin = () => {
 
         {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-        <button type="submit">Login</button>
+        <button type="submit" className="login-button">Login</button> <br></br> <br></br>
+        Don't have an account ? <br></br> 
+        <Link to="/usersignup">Register</Link>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
-import './SellerSignup.module.css'; // Scoped CSS for SellerSignup
+import { useNavigate,Link } from 'react-router-dom'; // Import useNavigate for redirection
+import './styles/SellerSignup.css'; // Scoped CSS for SellerSignup
 
 const SellerSignup = () => {
   const [formData, setFormData] = useState({
@@ -40,7 +40,7 @@ const SellerSignup = () => {
       // Redirect to the Admin Dashboard after a short delay
       setTimeout(() => {
         navigate('/admindashboard'); // Redirect to the admin dashboard page
-      }, 2000); // Optional delay before redirect (2 seconds)
+      }, 5000); // Optional delay before redirect (2 seconds)
       
       // Reset form fields after successful signup
       setFormData({
@@ -57,11 +57,13 @@ const SellerSignup = () => {
 
   return (
     <div className="sellerSignupContainer">
-      <h2>Seller Signup</h2>
+      
+      <form onSubmit={handleSubmit} className="signupForm">
       {error && <p className="errorMessage">{error}</p>}
       {success && <p className="successMessage">{success}</p>}
-      <form onSubmit={handleSubmit} className="signupForm">
+      <h2>Seller Signup</h2>
         <input
+         className='input-class'
           type="email"
           name="emailId"
           placeholder="Email Address"
@@ -70,6 +72,7 @@ const SellerSignup = () => {
           required
         />
         <input
+        className='input-class'
           type="password"
           name="password"
           placeholder="Password"
@@ -78,6 +81,7 @@ const SellerSignup = () => {
           required
         />
         <input
+         className='input-class'
           type="text"
           name="phoneNumber"
           placeholder="Phone Number"
@@ -88,6 +92,10 @@ const SellerSignup = () => {
         <button type="submit" disabled={loading}>
           {loading ? 'Signing Up...' : 'Sign Up'}
         </button>
+        Already have an admin account? <br></br>
+        <Link to="/sellerlogin">Login</Link> <br></br> <br></br>
+        Are you a user? <br></br> 
+        <Link to="/userlogin">Login as user</Link>
       </form>
     </div>
   );

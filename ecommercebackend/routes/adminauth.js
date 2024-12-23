@@ -105,7 +105,6 @@ router.post('/seller/signup', async (req, res) => {
 
     // Store sellerId in session
     req.session.sellerId = sellerId;
-    console.log(req.session)
     res.status(201).json({
       message: 'Seller registered successfully',
       sellerId
@@ -156,8 +155,6 @@ router.post('/verify-seller', async (req, res) => {
 
 router.post('/logout', async (req, res) => {
   try {
-    console.log("hi")
-    console.log(req.session)
     // Ensure that the sellerId is coming from the session rather than the body.
     const { sellerId } = req.session;
 

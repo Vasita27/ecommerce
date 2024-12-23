@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import "./styles/SellerLogin.css"
+import { Link } from 'react-router-dom';
 
 const SellerLogin = () => {
   const [sellerId, setSellerId] = useState('');
@@ -47,9 +49,11 @@ const SellerLogin = () => {
 
   return (
     <div className="login-container">
-      <h2>Seller Login</h2>
+      
       <form onSubmit={handleLogin}>
+      <h2>Seller Login</h2>
         <div className="input-group">
+       
           <label>Seller ID</label>
           <input
             type="text"
@@ -84,7 +88,11 @@ const SellerLogin = () => {
 
         {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-        <button type="submit">Login</button>
+        <button type="submit">Login</button> <br></br> <br></br>
+        Didn't sign up as seller? <br></br>
+        <Link to="/">Sign up as seller</Link> <br></br> <br></br>
+        Are you a user? <br></br>
+        <Link to="/userlogin">Login as user</Link>
       </form>
     </div>
   );

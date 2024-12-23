@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './styles/UserDashboard.css';
+import './styles/UserDashboard.css'; // Importing CSS for styles
+import TabletSlider from './TabletSlider';
 
 const UserDashboard = () => {
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]); // For category search
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [quantities, setQuantities] = useState({});
   const [cart, setCart] = useState({});
   const [userId, setUserId] = useState(null);
   const [category, setCategory] = useState('');
-  const [isCategorySearch, setIsCategorySearch] = useState(false); // Flag to toggle view
+  const [isCategorySearch, setIsCategorySearch] = useState(false);
   const navigate = useNavigate();
 
-  // Fetch the userId from the session on component mount
   useEffect(() => {
     const fetchUserId = async () => {
       try {
@@ -32,7 +32,6 @@ const UserDashboard = () => {
     fetchUserId();
   }, []);
 
-  // Fetch all products
   const fetchProducts = async () => {
     setLoading(true);
     try {
@@ -49,7 +48,6 @@ const UserDashboard = () => {
     fetchProducts();
   }, []);
 
-  // Fetch products by category
   const fetchProductsByCategory = async () => {
     if (!category.trim()) {
       fetchProducts();
@@ -63,7 +61,7 @@ const UserDashboard = () => {
         category,
       });
       setFilteredProducts(response.data.products);
-      setIsCategorySearch(true); // Switch to category view
+      setIsCategorySearch(true);
     } catch (err) {
       setError('Failed to fetch products by category');
     } finally {
@@ -71,13 +69,11 @@ const UserDashboard = () => {
     }
   };
 
-  // Logout function
   const handleLogout = () => {
     sessionStorage.removeItem('userId');
-    navigate('/login');
+    navigate('/userlogin');
   };
 
-  // Add product to cart
   const handleAddToCart = async (productId, quantity) => {
     if (!userId) {
       alert('Please login first');
@@ -106,7 +102,6 @@ const UserDashboard = () => {
     }
   };
 
-  // Handle quantity change
   const handleQuantityChange = (e, productId) => {
     const quantity = parseInt(e.target.value);
     setQuantities((prevQuantities) => ({
@@ -115,7 +110,6 @@ const UserDashboard = () => {
     }));
   };
 
-  // Update product quantity
   const handleUpdateQuantity = async (productId) => {
     const quantity = quantities[productId] || 1;
     try {
@@ -136,7 +130,6 @@ const UserDashboard = () => {
     }
   };
 
-  // Delete product from cart
   const handleDeleteFromCart = async (productId) => {
     if (!userId) {
       alert('Please login first');
@@ -171,13 +164,37 @@ const UserDashboard = () => {
 
   return (
     <div className="user-dashboard">
-      <header className="dashboard-header">
-        <h1>Welcome to the User Dashboard</h1>
-        <button className="logout-button" onClick={handleLogout}>Logout</button>
-        <button className="go-to-cart-button" onClick={handleGoToCart}>Go to Cart</button>
-      </header>
+      {/* Scrolling Headline in Colored Box */}
+      <div className="scrolling-headline-box">
+        <marquee>Welcome to the Ultimate Clothing Store: Mytalorzone by Sahiba</marquee>
+      </div>
 
-      {/* Category Search Bar */}
+      {/* Navigation Bar */}
+      <div className="navigation">
+        <nav className="navbar navbar-expand-lg bg-body-primary" style={{ backgroundColor: '#89A8B2' }}>
+          <div className="container-fluid">
+            <a className="navbar-brand" href="#">Mytalorzone</a>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a className="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">Products</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">Pricing</a>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      {/* Category Search */}
       <section className="category-search">
         <input
           type="text"
@@ -186,12 +203,28 @@ const UserDashboard = () => {
           onChange={(e) => setCategory(e.target.value)}
           className="category-input"
         />
-        <button onClick={fetchProductsByCategory} className="search-button">Search</button>
+        <button onClick={fetchProductsByCategory} className="search-button">Search</button> 
+       
+        
+        <button className="go-to-cart-button" onClick={handleGoToCart}>Go to Cart</button>
+        <button className="logout-button" onClick={handleLogout}>Logout</button>
+      
       </section>
 
-      {/* Product List */}
+      {/* Background Color and Diagonal Clip */}
+      <div className="background-section">
+        <div className="content-text">
+        
+        </div>
+      </div>
+      
+
+      {/* Tablet Slider on the Right */}
+      <TabletSlider className="tablet-slider" />
+
+      {/* Products Section */}
       <section className="products-section">
-        <h2>{isCategorySearch ? `Products in "${category}"` : 'Available Products'}</h2>
+        <h2>{isCategorySearch ? `Products in "${category}"` : ''}</h2>
         {loading ? (
           <p>Loading products...</p>
         ) : error ? (
@@ -204,14 +237,14 @@ const UserDashboard = () => {
                 <h3 className="product-title">{product.name}</h3>
                 <p className="product-description">{product.description}</p>
                 <p className="product-price">${product.price}</p>
-
+                <p style={{textAlign:"left"}}> Quantity : 
                 <input
                   type="number"
                   min="1"
                   value={quantities[product.productId] || 1}
                   onChange={(e) => handleQuantityChange(e, product.productId)}
                   className="quantity-input"
-                />
+                /></p>
 
                 <button
                   className="add-to-cart-button"
@@ -231,7 +264,23 @@ const UserDashboard = () => {
           </div>
         )}
       </section>
+
+      
+     
+      {/* Footer Section */}
+<footer className="footer">
+  <div className="footer-content">
+    <p>&copy; 2024 Mytalorzone by Sahiba. All rights reserved.</p>
+    <div className="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
     </div>
+  </div>
+</footer>
+
+    </div>
+
   );
 };
 

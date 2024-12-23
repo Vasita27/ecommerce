@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import "./styles/AdminDashboard.css"
 const AdminDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -181,7 +181,7 @@ const AdminDashboard = () => {
         {/* Product Management */}
         <h3>Product Management</h3>
         <button onClick={handleCreateProduct} style={buttonStyle}>Create Product</button>
-        <button onClick={handleAssignProduct} style={buttonStyle}>Assign Product</button>
+        
 
         {/* Get All Products */}
         <h3>View All Products</h3>
@@ -238,9 +238,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Orders and User Details */}
-        <h3>Orders & User Details</h3>
-        <button onClick={handleGetOrders} style={buttonStyle}>Get Orders</button>
-        <button onClick={handleGetUserDetails} style={buttonStyle}>Get User Details</button>
+        
       </div>
 
       {/* Logout Button */}

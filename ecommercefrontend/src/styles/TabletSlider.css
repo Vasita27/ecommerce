@@ -1,0 +1,22 @@
+.tablet-slider {
+    width:40%;
+    overflow: hidden;
+    border-radius: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    height: 250px;
+    top: 30px;
+    margin: auto;
+  }
+  
+  .slider {
+    display: flex;
+    transition: transform 1s ease-in-out; /* Smooth sliding effect */
+  }
+  
+  .slider img {
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+  }
+  

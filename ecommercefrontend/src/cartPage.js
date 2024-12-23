@@ -6,6 +6,7 @@ const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);  // Default to an empty array
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [couponCode, setCouponCode] = useState('');
   const [discount, setDiscount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -23,6 +24,13 @@ const CartPage = () => {
       console.log(err);
       setError('Failed to find product details');
     }
+  };
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % coupons.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + coupons.length) % coupons.length);
   };
 
   const fetchCartItems = async () => {
@@ -129,7 +137,7 @@ const CartPage = () => {
         alert('Order placed successfully!');
         // Clear the cart or redirect to order confirmation page, etc.
         cartItems.forEach((item) => {
-            handleDeleteFromCart(item.productId); // Delete the item from cart
+          handleDeleteFromCart(item.productId); // Delete the item from cart
         });
         setCartItems([]);
       } else {
@@ -140,16 +148,15 @@ const CartPage = () => {
       alert('Error placing order');
     }
   };
-  const handleBack=()=>{
-     window.location.href = `/userdashboard`
-  }
+
+  const handleBack = () => {
+    window.location.href = `/userdashboard`;
+  };
 
   // Fetch available coupons (this can be modified to get real coupons from the backend)
   const fetchCoupons = async () => {
-    // Example coupons (this could be fetched from the backend)
     console.log("Fetching coupons...");
     const response = await axios.get("http://localhost:5000/coupon/get-coupon");
-    console.log(response.data);
     setCoupons(response.data.coupons);
   };
 
@@ -202,7 +209,7 @@ const CartPage = () => {
   return (
     <div className="cart-page">
       <h1>Your Cart</h1>
-      <button onClick={handleBack}>Back to home</button>
+      <button onClick={handleBack}>Back to home</button> <br></br> <br></br>
       {loading ? (
         <p>Loading your cart...</p>
       ) : error ? (
@@ -242,35 +249,87 @@ const CartPage = () => {
         </div>
       )}
 
-      <div className="coupon-section">
+      <div className="coupon-section" style={{margin:"auto"}}>
         <input
           type="text"
           placeholder="Enter coupon code"
           value={couponCode}
           onChange={(e) => setCouponCode(e.target.value)}
           className="coupon-input"
+          style={{ border: '2px solid #1E90FF' , width:"20%",margin:"auto" ,display:"flex",justifyContent:"center"}} // Previous border color for input
         />
-        <button onClick={applyCoupon} className="apply-coupon-button">
-          Apply Coupon
-        </button>
-        <button
-          onClick={() => setShowCoupons(!showCoupons)}
-          className="view-coupons-button"
-        >
-          View Coupons
-        </button>
+        <div className="coupon-buttons" style={{display:"flex",justifyContent:"center"}}>
+          <button onClick={applyCoupon} className="apply-coupon-button">
+            Apply Coupon
+          </button>
+          <button
+            onClick={() => setShowCoupons(!showCoupons)}
+            className="view-coupons-button"
+          >
+            View Coupons
+          </button>
+        </div>
       </div>
 
       {showCoupons && (
         <div className="coupons-list">
-          <h3>Available Coupons:</h3>
-          <ul>
-            {coupons.map((coupon) => (
-              <li key={coupon.code}>
-                <strong>{coupon.code}</strong>: {coupon.description}
-              </li>
-            ))}
-          </ul>
+          
+          <div className="coupon-cards">
+          <div className="success-stories-container">
+      
+      <div className="carousel">
+        <div className="carousel-cards">
+          {coupons.map((card, index) => {
+            let position = '';
+            if (index === (currentIndex + 1) % coupons.length) {
+              position = 'right'; // The next card
+            } else if (index === currentIndex) {
+              position = 'center'; // The current card
+            } else if (index === (currentIndex - 1 + coupons.length) % coupons.length) {
+              position = 'left'; // The previous card
+            } else {
+              position = 'hidden'; // Cards not in view
+            }
+
+            return (
+              <div key={index} className={`card  ${position}`}>
+                {index === currentIndex && (
+                  <>
+                    <button className={`carousel-button left`} onClick={nextSlide}>
+                      <div className={`left`}>&lt;</div>
+                    </button>
+                    <div className="card-content">
+                      <div className="card-image">
+                        <img src="https://cdn-icons-png.freepik.com/512/6133/6133253.png" alt={card.code} />
+                      </div>
+                      <div className={`card-info`}>
+                        <h3>{card.code}</h3>
+                        <p style={{padding:"10px"}} className={`content`}>Discount Percentage: {card.discountPercentage}</p>
+                      </div>
+                    </div>
+                    <button className={`carousel-button right`} onClick={nextSlide}>
+                      <div className={`right`}>&gt;</div>
+                    </button>
+                  </>
+                )}
+                {index !== currentIndex && (
+                  <div className="card-content">
+                    <div className="card-image">
+                      <img src="https://cdn-icons-png.freepik.com/512/6133/6133253.png" alt={card.title} />
+                    </div>
+                    <div className="card-info">
+                      <h3>{card.code}</h3>
+                      <p>Discount Percentage: {card.discountPercentage}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+          </div>
         </div>
       )}
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate,Link } from 'react-router-dom';
+import "./styles/UserSignup.css"
 const UserSignup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -57,10 +57,10 @@ const UserSignup = () => {
   };
 
   return (
-    <div className="signup-container" style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h2>User Signup</h2>
-      <form onSubmit={handleSignup} style={{ display: 'inline-block', textAlign: 'left' }}>
-        <div className="input-group" style={{ marginBottom: '10px' }}>
+    <div className="signup-container">
+      <form onSubmit={handleSignup} >
+        <div className="input-group">
+        <h2>User Signup</h2> <br></br>
           <label>Name</label>
           <input
             type="text"
@@ -115,18 +115,13 @@ const UserSignup = () => {
         )}
 
         <button
+        className='but'
           type="submit"
-          style={{
-            backgroundColor: 'blue',
-            color: 'white',
-            padding: '10px 20px',
-            borderRadius: '5px',
-            border: 'none',
-            cursor: 'pointer'
-          }}
         >
           Sign Up
-        </button>
+        </button> <br></br> <br></br>
+        Already have an account? <br></br>
+        <Link to="/userlogin">Login</Link>
       </form>
     </div>
   );

@@ -56,7 +56,7 @@ router.post('/signup', async (req, res) => {
       if (user.accountStatus === 'open') {
         // Save userId in session
         req.session.userId = user.userId;
-        console.log("session saved")
+       
         // Respond with success
         return res.status(200).json({ message: 'Login successful', userId: user.userId });
       }
@@ -71,7 +71,7 @@ router.post('/signup', async (req, res) => {
   });
 
 router.post('/logout', (req, res) => {
-  console.log("yo")
+ 
   req.session.destroy((err) => {
     if (err) return res.status(500).json({ error: 'Error logging out' });
     res.clearCookie('connect.sid');
@@ -146,7 +146,7 @@ router.post('/seller/signup', async (req, res) => {
 router.post('/seller/login', async (req, res) => {
   try {
     const { sellerId, emailOrPhone, password } = req.body;
-    console.log(req.body)
+   
     // Find seller by ID and email/phone
     const seller = await Seller.findOne({
       sellerId,
@@ -165,7 +165,7 @@ router.post('/seller/login', async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ error: 'Invalid credentials' });
     }
-    console.log("till here")
+  
 
     // Store sellerId in session
     req.session.sellerId = sellerId;
