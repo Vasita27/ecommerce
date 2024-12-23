@@ -24,8 +24,8 @@ const UserDashboard = () => {
         sessionStorage.setItem('userId', userId);
         setUserId(userId);
       } catch (err) {
-        console.error('User not logged in:', err);
-        navigate('/userlogin');
+       
+        navigate('/userdashboard');
       }
     };
 
