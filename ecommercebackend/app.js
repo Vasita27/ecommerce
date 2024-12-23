@@ -286,6 +286,10 @@ app.put('/instock-update', async (req, res) => {
 
 // Complaints Schema
 
+app.get('/', async (req, res) => {
+  res.send("Hello")
+})
+
 // Assign Product ID Route
 app.get('/assign-productid', async (req, res) => {
   try {
