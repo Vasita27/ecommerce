@@ -31,7 +31,7 @@ const SellerSignup = () => {
 
     try {
       // Send the POST request to the backend with credentials enabled
-      const response = await axios.post('https://vercel.com/vasita-puppalas-projects/ecommerce-sl5p/HhQrX2kz3CHR3VrQ4me5mQPsQYdH/admin/seller/signup', formData, {
+      const response = await axios.post('http://localhost:5000/admin/seller/signup', formData, {
         withCredentials: true, // Ensure that the session cookie is sent
       });
 
